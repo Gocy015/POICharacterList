@@ -1,0 +1,3 @@
+target 'POICharacterList' do
+pod 'AsyncDisplayKit'
+end
