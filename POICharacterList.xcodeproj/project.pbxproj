@@ -14,6 +14,8 @@
 		C35A0B961D9227E400F3DED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35A0B941D9227E400F3DED7 /* Main.storyboard */; };
 		C35A0B981D9227E400F3DED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35A0B971D9227E400F3DED7 /* Assets.xcassets */; };
 		C35A0B9B1D9227E400F3DED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35A0B991D9227E400F3DED7 /* LaunchScreen.storyboard */; };
+		C36261D91D93C98E00B58A81 /* CharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36261D81D93C98E00B58A81 /* CharacterViewController.m */; };
+		C36261DC1D93D31E00B58A81 /* CharacterDetailNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C36261DB1D93D31E00B58A81 /* CharacterDetailNode.m */; };
 		C39925131D922D5300D6A298 /* CharacterInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39925121D922D5300D6A298 /* CharacterInfo.m */; };
 		C39925161D922DC900D6A298 /* InfoCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C39925151D922DC900D6A298 /* InfoCellNode.m */; };
 		C39925191D923AFB00D6A298 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = C39925181D923AFB00D6A298 /* placeholder.png */; };
@@ -33,6 +35,10 @@
 		C35A0B971D9227E400F3DED7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C35A0B9A1D9227E400F3DED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C35A0B9C1D9227E400F3DED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C36261D71D93C98E00B58A81 /* CharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterViewController.h; sourceTree = "<group>"; };
+		C36261D81D93C98E00B58A81 /* CharacterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterViewController.m; sourceTree = "<group>"; };
+		C36261DA1D93D31E00B58A81 /* CharacterDetailNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterDetailNode.h; sourceTree = "<group>"; };
+		C36261DB1D93D31E00B58A81 /* CharacterDetailNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterDetailNode.m; sourceTree = "<group>"; };
 		C39925111D922D5300D6A298 /* CharacterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfo.h; sourceTree = "<group>"; };
 		C39925121D922D5300D6A298 /* CharacterInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfo.m; sourceTree = "<group>"; };
 		C39925141D922DC900D6A298 /* InfoCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCellNode.h; sourceTree = "<group>"; };
@@ -92,6 +98,7 @@
 			children = (
 				C39925171D923AFB00D6A298 /* Resources */,
 				C39925101D922D4400D6A298 /* CustomNodes */,
+				C36261D61D93C96A00B58A81 /* NodeController */,
 				C399250F1D9229B200D6A298 /* DataModel */,
 				C35A0B8E1D9227E400F3DED7 /* AppDelegate.h */,
 				C35A0B8F1D9227E400F3DED7 /* AppDelegate.m */,
@@ -114,6 +121,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C36261D61D93C96A00B58A81 /* NodeController */ = {
+			isa = PBXGroup;
+			children = (
+				C36261D71D93C98E00B58A81 /* CharacterViewController.h */,
+				C36261D81D93C98E00B58A81 /* CharacterViewController.m */,
+			);
+			path = NodeController;
+			sourceTree = "<group>";
+		};
 		C399250F1D9229B200D6A298 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +144,8 @@
 			children = (
 				C39925141D922DC900D6A298 /* InfoCellNode.h */,
 				C39925151D922DC900D6A298 /* InfoCellNode.m */,
+				C36261DA1D93D31E00B58A81 /* CharacterDetailNode.h */,
+				C36261DB1D93D31E00B58A81 /* CharacterDetailNode.m */,
 			);
 			path = CustomNodes;
 			sourceTree = "<group>";
@@ -267,7 +285,9 @@
 				C35A0B931D9227E400F3DED7 /* ViewController.m in Sources */,
 				C35A0B901D9227E400F3DED7 /* AppDelegate.m in Sources */,
 				C35A0B8D1D9227E400F3DED7 /* main.m in Sources */,
+				C36261DC1D93D31E00B58A81 /* CharacterDetailNode.m in Sources */,
 				C39925131D922D5300D6A298 /* CharacterInfo.m in Sources */,
+				C36261D91D93C98E00B58A81 /* CharacterViewController.m in Sources */,
 				C39925161D922DC900D6A298 /* InfoCellNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

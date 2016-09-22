@@ -9,9 +9,19 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
 @class CharacterInfo;
+@class InfoCellNode;
+
+@protocol CellExpandDelegate
+
+-(void)cellNode:(InfoCellNode *)cellNode didExpand:(BOOL)expand;
+
+@end
 
 @interface InfoCellNode : ASCellNode
 
 -(instancetype)initWithCharacterInfo:(CharacterInfo *)info;
+
+
+@property (nonatomic ,weak) id <CellExpandDelegate> delegate;
 
 @end

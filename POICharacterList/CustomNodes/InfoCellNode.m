@@ -77,8 +77,9 @@
         
         [self addSubnode:_photoNode];
         
-        _detailNode = [ASButtonNode new]; 
+        _detailNode = [ASButtonNode new];
         [_detailNode setAttributedTitle:[[NSAttributedString alloc] initWithString:@"View Photo" attributes:[self buttonNormalAttributes]] forState:ASControlStateNormal];
+        _detailNode.contentEdgeInsets = UIEdgeInsetsMake(-16, -16, -16, -16);
         
         [_detailNode addTarget:self action:@selector(showPhoto) forControlEvents:ASControlNodeEventTouchUpInside];
         [self addSubnode:_detailNode];
@@ -171,12 +172,14 @@
         
     }
     
+    
     ASStackLayoutSpec *leftStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
                                                                            spacing:6
                                                                     justifyContent:ASStackLayoutJustifyContentStart
                                                                         alignItems:ASStackLayoutAlignItemsCenter
                                                                           children:leftItems];
     leftStack.alignSelf = ASStackLayoutAlignSelfStart;
+    
     
     ASStackLayoutSpec *rightStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
                                                                             spacing:8
@@ -199,7 +202,12 @@
     
 }
 
-
+-(void)layoutDidFinish{
+    [super layoutDidFinish];
+    
+    [self.delegate cellNode:self didExpand:_show];
+    
+}
 
 #pragma mark - ASNetworkImageNode Delegate
 
@@ -225,6 +233,7 @@
     }else{
         [self setNeedsLayout];
     }
+    
 }
 
 
