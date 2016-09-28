@@ -14,8 +14,10 @@
 		C35A0B961D9227E400F3DED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35A0B941D9227E400F3DED7 /* Main.storyboard */; };
 		C35A0B981D9227E400F3DED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35A0B971D9227E400F3DED7 /* Assets.xcassets */; };
 		C35A0B9B1D9227E400F3DED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35A0B991D9227E400F3DED7 /* LaunchScreen.storyboard */; };
+		C35C94CD1D968BC000D8A472 /* AnimateNetworkImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C35C94CC1D968BC000D8A472 /* AnimateNetworkImageNode.m */; };
 		C36261D91D93C98E00B58A81 /* CharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36261D81D93C98E00B58A81 /* CharacterViewController.m */; };
 		C36261DC1D93D31E00B58A81 /* CharacterDetailNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C36261DB1D93D31E00B58A81 /* CharacterDetailNode.m */; };
+		C39912B91D950755005C3D24 /* PhotoCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C39912B81D950755005C3D24 /* PhotoCellNode.m */; };
 		C39925131D922D5300D6A298 /* CharacterInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39925121D922D5300D6A298 /* CharacterInfo.m */; };
 		C39925161D922DC900D6A298 /* InfoCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C39925151D922DC900D6A298 /* InfoCellNode.m */; };
 		C39925191D923AFB00D6A298 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = C39925181D923AFB00D6A298 /* placeholder.png */; };
@@ -35,10 +37,14 @@
 		C35A0B971D9227E400F3DED7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C35A0B9A1D9227E400F3DED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C35A0B9C1D9227E400F3DED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C35C94CB1D968BC000D8A472 /* AnimateNetworkImageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimateNetworkImageNode.h; sourceTree = "<group>"; };
+		C35C94CC1D968BC000D8A472 /* AnimateNetworkImageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimateNetworkImageNode.m; sourceTree = "<group>"; };
 		C36261D71D93C98E00B58A81 /* CharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterViewController.h; sourceTree = "<group>"; };
 		C36261D81D93C98E00B58A81 /* CharacterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterViewController.m; sourceTree = "<group>"; };
 		C36261DA1D93D31E00B58A81 /* CharacterDetailNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterDetailNode.h; sourceTree = "<group>"; };
 		C36261DB1D93D31E00B58A81 /* CharacterDetailNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterDetailNode.m; sourceTree = "<group>"; };
+		C39912B71D950755005C3D24 /* PhotoCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCellNode.h; sourceTree = "<group>"; };
+		C39912B81D950755005C3D24 /* PhotoCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCellNode.m; sourceTree = "<group>"; };
 		C39925111D922D5300D6A298 /* CharacterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfo.h; sourceTree = "<group>"; };
 		C39925121D922D5300D6A298 /* CharacterInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfo.m; sourceTree = "<group>"; };
 		C39925141D922DC900D6A298 /* InfoCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCellNode.h; sourceTree = "<group>"; };
@@ -142,10 +148,14 @@
 		C39925101D922D4400D6A298 /* CustomNodes */ = {
 			isa = PBXGroup;
 			children = (
+				C35C94CB1D968BC000D8A472 /* AnimateNetworkImageNode.h */,
+				C35C94CC1D968BC000D8A472 /* AnimateNetworkImageNode.m */,
 				C39925141D922DC900D6A298 /* InfoCellNode.h */,
 				C39925151D922DC900D6A298 /* InfoCellNode.m */,
 				C36261DA1D93D31E00B58A81 /* CharacterDetailNode.h */,
 				C36261DB1D93D31E00B58A81 /* CharacterDetailNode.m */,
+				C39912B71D950755005C3D24 /* PhotoCellNode.h */,
+				C39912B81D950755005C3D24 /* PhotoCellNode.m */,
 			);
 			path = CustomNodes;
 			sourceTree = "<group>";
@@ -284,6 +294,8 @@
 			files = (
 				C35A0B931D9227E400F3DED7 /* ViewController.m in Sources */,
 				C35A0B901D9227E400F3DED7 /* AppDelegate.m in Sources */,
+				C39912B91D950755005C3D24 /* PhotoCellNode.m in Sources */,
+				C35C94CD1D968BC000D8A472 /* AnimateNetworkImageNode.m in Sources */,
 				C35A0B8D1D9227E400F3DED7 /* main.m in Sources */,
 				C36261DC1D93D31E00B58A81 /* CharacterDetailNode.m in Sources */,
 				C39925131D922D5300D6A298 /* CharacterInfo.m in Sources */,

@@ -24,7 +24,6 @@
     self = [super initWithNode:[[CharacterDetailNode alloc] initWithInfo:info]];
     
     self.title = [NSString stringWithFormat:@"%@",info.role];
-     
     
     return self;
 }
@@ -37,6 +36,14 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [((CharacterDetailNode *)self.node) startCycling];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    
+    [((CharacterDetailNode *)self.node) stopCycling];
 }
 
 - (void)didReceiveMemoryWarning {

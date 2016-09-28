@@ -7,12 +7,16 @@
 //
 
 #import "InfoCellNode.h"
-#import "CharacterInfo.h" 
+#import "CharacterInfo.h"
+#import "AnimateNetworkImageNode.h"
+
+
+#define USE_SET_NEEDS_DISPLAY YES
 
 @interface InfoCellNode () <ASNetworkImageNodeDelegate>
 
 @property (nonatomic ,strong) ASNetworkImageNode *headerNode;
-@property (nonatomic ,strong) ASNetworkImageNode *photoNode;
+@property (nonatomic ,strong) AnimateNetworkImageNode *photoNode;
 @property (nonatomic ,strong) ASTextNode *roleNode;
 @property (nonatomic ,strong) ASTextNode *asNode;
 @property (nonatomic ,strong) ASTextNode *actorNode;
@@ -57,8 +61,10 @@
         
         [self addSubnode:_headerNode];
         
-        _photoNode = [ASNetworkImageNode new];
+        _photoNode = [AnimateNetworkImageNode new];
         _photoNode.delegate = self;
+        _photoNode.backgroundColor = [UIColor clearColor];
+//        _photoNode.defaultImage = [self placeholderImage];
         _photoNode.imageModificationBlock = ^UIImage *(UIImage *originalImg){
             UIGraphicsBeginImageContext(originalImg.size);
             
@@ -79,7 +85,7 @@
         
         _detailNode = [ASButtonNode new];
         [_detailNode setAttributedTitle:[[NSAttributedString alloc] initWithString:@"View Photo" attributes:[self buttonNormalAttributes]] forState:ASControlStateNormal];
-        _detailNode.contentEdgeInsets = UIEdgeInsetsMake(-16, -16, -16, -16);
+        _detailNode.hitTestSlop = UIEdgeInsetsMake(-6, -6, -6, -6);
         
         [_detailNode addTarget:self action:@selector(showPhoto) forControlEvents:ASControlNodeEventTouchUpInside];
         [self addSubnode:_detailNode];
@@ -129,24 +135,19 @@
 //    NSLog(@"constraintSize.min : %@" ,NSStringFromCGSize(constrainedSize.min));
     
     NSMutableArray *leftItems = [NSMutableArray new];
-    _headerNode.alignSelf = ASStackLayoutAlignSelfStart;
-    
     _headerNode.preferredFrameSize = CGSizeMake(60, 60);
-    
-    
-    
     
     [leftItems addObject:_headerNode];
     
     if ([_info.photoUrl length] > 0) {
         [leftItems addObject:_detailNode];
     }
-    
-    [_roleNode measure:constrainedSize.max];
-    [_actorNode measure:constrainedSize.max];
-    
-    
+
     NSMutableArray *rightItems = [NSMutableArray new];
+    
+    _actorNode.flexShrink = YES;
+    _actorNode.maximumNumberOfLines = 1;
+    _actorNode.truncationMode = NSLineBreakByTruncatingMiddle;
     
     ASStackLayoutSpec *actorStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
                                                                             spacing:6
@@ -159,7 +160,7 @@
                                                                     justifyContent:ASStackLayoutJustifyContentCenter
                                                                         alignItems:ASStackLayoutAlignItemsEnd
                                                                           children:@[actorStack,_roleNode]];
-     
+    
     infoStack.spacingBefore = 20;
     infoStack.spacingAfter = 6;
     
@@ -178,7 +179,10 @@
                                                                     justifyContent:ASStackLayoutJustifyContentStart
                                                                         alignItems:ASStackLayoutAlignItemsCenter
                                                                           children:leftItems];
-    leftStack.alignSelf = ASStackLayoutAlignSelfStart;
+    
+//    _headerNode.alignSelf = ASStackLayoutAlignSelfStart;
+
+//    leftStack.alignSelf = ASStackLayoutAlignSelfStart;
     
     
     ASStackLayoutSpec *rightStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
@@ -209,11 +213,73 @@
     
 }
 
+
+-(void)animateLayoutTransition:(id<ASContextTransitioning>)context{
+    CGRect from = [context initialFrameForNode:_photoNode];
+    CGRect to = [context finalFrameForNode:_photoNode];
+    
+    CGRect sfrom = [context initialFrameForNode:self];
+    CGRect sto = [context finalFrameForNode:self];
+    
+//    if(_show){
+////        _photoNode.frame = to;
+//        _photoNode.alpha = 0;
+////        _photoNode.frame = CGRectMake(to.origin.x, to.origin.y, to.size.width, 0);
+//        _photoNode.frame = to;
+//        [UIView animateWithDuration:1 animations:^{
+////            _photoNode.frame = to;
+//            _photoNode.alpha = 1;
+//            [self setNeedsLayout];
+//        } completion:^(BOOL finished) {
+//            [context completeTransition:finished];
+//        }];
+//    }else{
+//        //hide
+//        
+//        _photoNode.frame = from;
+//        _photoNode.alpha = 1;
+//        [UIView animateWithDuration:0.3 animations:^{
+//            _photoNode.frame = CGRectMake(from.origin.x, from.origin.y, from.size.width, 0);
+//            _photoNode.alpha = 0;
+//            [self setNeedsLayout];
+//        } completion:^(BOOL finished) {
+//            _photoNode.frame = to;
+//            [context completeTransition:finished];
+//        }];
+//    }
+    
+    for (ASDisplayNode *node in self.subnodes){
+        if ([node isKindOfClass:[AnimateNetworkImageNode class]]) {
+            node.frame = [context finalFrameForNode:node];
+        }
+    }
+    
+//    [UIView animateWithDuration:2 animations:^{
+//        self.frame = sto;
+////        [self setNeedsLayout];
+//    } completion:^(BOOL finished) {
+//        [context completeTransition:finished];
+//    }];
+    
+}
+
 #pragma mark - ASNetworkImageNode Delegate
 
 -(void)imageNode:(ASNetworkImageNode *)imageNode didLoadImage:(UIImage *)image{
-
-    [self setNeedsLayout];
+    
+    if (USE_SET_NEEDS_DISPLAY) {
+        
+        [self setNeedsLayout];
+    }else{
+        
+        [self transitionLayoutWithAnimation:YES shouldMeasureAsync:YES measurementCompletion:nil];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _photoNode.show = YES;
+        [_photoNode transitionLayoutWithAnimation:YES shouldMeasureAsync:YES measurementCompletion:nil];
+    });
+    
 }
 
 
@@ -222,7 +288,7 @@
 -(void)showPhoto{
 //    NSLog(@"Show Detail");
     _show = !_show;
-    _photoNode.hidden = !_show;
+//    _photoNode.hidden = !_show;
     NSString *title = _show ? @"Hide Photo" : @"View Photo";
     
     [_detailNode setAttributedTitle:[[NSAttributedString alloc] initWithString:title attributes:[self buttonNormalAttributes]] forState:ASControlStateNormal];
@@ -231,7 +297,16 @@
     if (!_photoNode.URL && [_info.photoUrl length]) {
         _photoNode.URL = [NSURL URLWithString:_info.photoUrl];
     }else{
-        [self setNeedsLayout];
+        if (USE_SET_NEEDS_DISPLAY) {
+            
+            [self setNeedsLayout];
+        }else{
+            
+            [self transitionLayoutWithAnimation:YES shouldMeasureAsync:YES measurementCompletion:nil];
+        }
+
+        _photoNode.show = _show;
+        [_photoNode transitionLayoutWithAnimation:YES shouldMeasureAsync:YES measurementCompletion:nil];
     }
     
 }
@@ -253,7 +328,7 @@
     NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
     style.alignment = NSTextAlignmentRight;
     
-    return @{NSForegroundColorAttributeName:[[UIColor blackColor] colorWithAlphaComponent:0.6],NSFontAttributeName:[UIFont systemFontOfSize:12 weight:UIFontWeightLight],NSParagraphStyleAttributeName:style};
+    return @{NSForegroundColorAttributeName:[[UIColor blackColor] colorWithAlphaComponent:0.6],NSFontAttributeName:[UIFont systemFontOfSize:16 weight:UIFontWeightLight],NSParagraphStyleAttributeName:style};
 }
 
 -(NSDictionary *)roleAttributes{

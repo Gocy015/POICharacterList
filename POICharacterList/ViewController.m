@@ -78,14 +78,15 @@
 }
 
 
+
 #pragma mark - ASTableDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    CharacterViewController *characterVC = [[CharacterViewController alloc] initWithInfo:self.characters[indexPath.row]];
-    
-    [self.navigationController pushViewController:characterVC animated:YES];
+//    CharacterViewController *characterVC = [[CharacterViewController alloc] initWithInfo:self.characters[indexPath.row]];
+//    
+//    [self.navigationController pushViewController:characterVC animated:YES];
     
 }
 
@@ -124,7 +125,7 @@
     
     CharacterInfo *bear = [CharacterInfo infoWithRole:@"Bear" actor:@"Graubaer's Boker(2nd and 3rd season)" thumbnail:@"https://raw.githubusercontent.com/Gocy015/POIImages/master/Bear.png" photo:@"https://raw.githubusercontent.com/Gocy015/POIImages/master/BearPhoto.png"];
     
-    self.characters = @[harold,john,root,fusco,carter,shaw,elias,bear];
+    self.characters = @[harold,john,root,bear,fusco,carter,shaw,elias];
 }
 
 @end

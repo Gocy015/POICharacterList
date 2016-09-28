@@ -15,4 +15,7 @@
 
 -(instancetype)initWithInfo:(CharacterInfo *)info;
 
+-(void)startCycling;
+-(void)stopCycling;
+
 @end
