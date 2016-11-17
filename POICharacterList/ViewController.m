@@ -12,7 +12,7 @@
 #import "CharacterInfo.h"
 #import "CharacterViewController.h"
 
-@interface ViewController () <ASTableDelegate , ASTableViewDataSource ,CellExpandDelegate>
+@interface ViewController () <ASTableDelegate , ASTableDataSource ,CellExpandDelegate>
 
 @property (nonatomic ,strong) ASTableNode *tableNode;
 @property (nonatomic ,strong) NSArray <CharacterInfo *>*characters;
@@ -57,16 +57,38 @@
 
 #pragma mark - ASTableViewDataSource
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    return 1;
+//}
+//
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return self.characters.count;
+//}
+//
+//-(ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    __weak typeof(self) wself = self;
+//    
+//    return ^ASCellNode *{
+//        InfoCellNode *node = [[InfoCellNode alloc] initWithCharacterInfo:wself.characters[indexPath.row]];
+//        node.delegate = wself;
+//        return node;
+//    };
+//    
+//}
+
+
+#pragma mark - ASTableDataSource
+
+
+- (NSInteger)numberOfSectionsInTableNode:(ASTableNode *)tableNode{
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section{
     return self.characters.count;
 }
-
--(ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (ASCellNodeBlock)tableNode:(ASTableNode *)tableNode nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
     __weak typeof(self) wself = self;
     
     return ^ASCellNode *{
@@ -77,29 +99,29 @@
     
 }
 
-
-
 #pragma mark - ASTableDelegate
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-//    CharacterViewController *characterVC = [[CharacterViewController alloc] initWithInfo:self.characters[indexPath.row]];
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    
-//    [self.navigationController pushViewController:characterVC animated:YES];
-    
-}
+////    CharacterViewController *characterVC = [[CharacterViewController alloc] initWithInfo:self.characters[indexPath.row]];
+////    
+////    [self.navigationController pushViewController:characterVC animated:YES];
+//    
+//}
 
 #pragma mark - CellExpandDelegate
 
 -(void)cellNode:(InfoCellNode *)cellNode didExpand:(BOOL)expand{
     if (expand) {
-        NSIndexPath *idx = [_tableNode.view indexPathForNode:cellNode];
-        CGRect rect = [_tableNode.view rectForRowAtIndexPath:idx];
+//        NSIndexPath *idx = [_tableNode.view indexPathForNode:cellNode];
+        NSIndexPath *idx = [_tableNode indexPathForNode:cellNode];
+        CGRect rect = [_tableNode rectForRowAtIndexPath:idx];
         if (!CGRectContainsRect(self.tableNode.bounds, rect)) {
             NSLog(@"Scroll %lu",idx.row);
             [self.tableNode invalidateCalculatedLayout];
-            [self.tableNode.view scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//            [self.tableNode.view scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            [self.tableNode scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     }
     

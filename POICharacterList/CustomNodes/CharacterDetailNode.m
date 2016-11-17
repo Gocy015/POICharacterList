@@ -47,8 +47,8 @@
     
     _photoPagerNode.position = CGPointMake(0, 0);
     
-    ASRelativeDimension width = ASRelativeDimensionMake(ASRelativeDimensionTypePercent, 1);
-    ASRelativeDimension height = ASRelativeDimensionMake(ASRelativeDimensionTypePercent, 0.32);
+    ASRelativeDimension width = ASRelativeDimensionMake(ASRelativeDimensionTypePoints, 1);
+    ASRelativeDimension height = ASRelativeDimensionMake(ASRelativeDimensionTypePoints, 0.32);
     
     ASRelativeSize size = ASRelativeSizeMake(width, height);
     

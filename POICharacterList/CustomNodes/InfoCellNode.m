@@ -114,16 +114,10 @@
 -(void)didLoad{
     [super didLoad];
 }
-
--(void)loadStateDidChange:(BOOL)inLoadState{
-    
-//    NSLog(@"In Load State");
-    
-    [super loadStateDidChange:inLoadState];
-    
-    if (inLoadState) {
-        _headerNode.URL = [NSURL URLWithString:_info.thumbnailUrl];
-    }
+ 
+-(void)didEnterPreloadState{
+    [super didEnterPreloadState];
+    _headerNode.URL = [NSURL URLWithString:_info.thumbnailUrl];
 }
 
 
@@ -135,7 +129,7 @@
 //    NSLog(@"constraintSize.min : %@" ,NSStringFromCGSize(constrainedSize.min));
     
     NSMutableArray *leftItems = [NSMutableArray new];
-    _headerNode.preferredFrameSize = CGSizeMake(60, 60);
+    _headerNode.style.width = _headerNode.style.height = ASDimensionMake(60);
     
     [leftItems addObject:_headerNode];
     
@@ -145,7 +139,7 @@
 
     NSMutableArray *rightItems = [NSMutableArray new];
     
-    _actorNode.flexShrink = YES;
+    _actorNode.style.flexShrink = YES;
     _actorNode.maximumNumberOfLines = 1;
     _actorNode.truncationMode = NSLineBreakByTruncatingMiddle;
     
@@ -161,14 +155,14 @@
                                                                         alignItems:ASStackLayoutAlignItemsEnd
                                                                           children:@[actorStack,_roleNode]];
     
-    infoStack.spacingBefore = 20;
-    infoStack.spacingAfter = 6;
+    infoStack.style.spacingBefore = 20;
+    infoStack.style.spacingAfter = 6;
     
     [rightItems addObject:infoStack];
     
     if(_photoNode.image && _show){
         ASRatioLayoutSpec *photoRatio = [ASRatioLayoutSpec ratioLayoutSpecWithRatio:_photoNode.image.size.height / _photoNode.image.size.width child:_photoNode];
-        photoRatio.alignSelf = ASStackLayoutAlignSelfCenter;
+        photoRatio.style.alignSelf = ASStackLayoutAlignSelfCenter;
         [rightItems addObject:photoRatio];
         
     }
@@ -192,7 +186,7 @@
                                                                            children:rightItems];
     
     
-    rightStack.flexGrow = rightStack.flexShrink = YES;
+    rightStack.style.flexGrow = rightStack.style.flexShrink = YES;
     
     
     ASStackLayoutSpec *stack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
